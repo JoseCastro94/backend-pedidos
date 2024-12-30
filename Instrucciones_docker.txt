@@ -1,0 +1,11 @@
+1. Instalar BD Postgre
+
+docker run --name postgres-container -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=123456 -e POSTGRES_DB=bd_catalogo -p 5432:5432 -d postgres:latest
+
+2. Instalar BD MongoDB
+
+docker run --name mongo-container -e MONGO_INITDB_DATABASE=db_pedidos -p 27017:27017 -d mongo:latest
+
+3. Desplegar la app
+
+docker-compose up --build

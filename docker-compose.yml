@@ -1,0 +1,40 @@
+
+services:
+  backend-pedidos:
+    build: .
+    container_name: backend-pedidos-container
+    networks:
+      - app-network
+    ports:
+      - "9090:9090"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - database-postgres
+      - database-mongo
+
+  database-postgres:
+    image: postgres:latest
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: bd_catalogo
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  database-mongo:
+    image: mongo:latest
+    container_name: mongo-container
+    environment:
+      MONGO_INITDB_DATABASE: db_pedidos
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
